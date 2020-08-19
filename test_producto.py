@@ -38,8 +38,10 @@ class TestProducto(unittest.TestCase):
 
     # Eliminar un producto
     def test_delete_producto(self):
-        ProductoService().delete_producto(0)
-        self.assertEqual(Repositorios.productosList.get(0), None)
+        producto = Producto("HP", 3000, "PC")
+        productoKey = ProductoService().add_producto(producto)
+        ProductoService().delete_producto(productoKey)
+        self.assertEqual(Repositorios.productosList.get(productoKey), None)
         print(ProductoService().get_productosList())
 
     @parameterized.expand([
